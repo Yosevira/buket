@@ -1,0 +1,403 @@
+/* Reset and Global Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #FFDAB9; /* Warna latar belakang utama */
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #D8A7B1; /* Warna romantis */
+    color: white;
+}
+
+header .logo {
+    font-size: 28px;
+    font-family: 'Dancing Script', cursive; /* Font untuk logo */
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login a {
+    padding: 5px 15px;
+    background: white;
+    color: #D8A7B1;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.login a:hover {
+    background: #ffe6e6;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 90vh; /* Membuat gambar memenuhi layar */
+    object-fit: cover;
+}
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    font-family: 'Dancing Script', cursive; /* Font besar untuk hero */
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+button{
+    position: absolute;
+    bottom: 20px;
+    left: 50px;
+    transform: translate(-50%);
+    padding: 10px 20px;
+    background-color: #FF6F61;
+    color: wheat;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #e55a4d;
+}
+.welcome-text{
+    color: black;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px white;
+}
+
+/* Tentang Kami */
+#about {
+    padding: 20px;
+    background-color: #FFF8F2; /* Latar belakang netral */
+    text-align: center;
+}
+
+#about h2 {
+    font-size: 32px;
+    font-family: 'Dancing Script', cursive;
+    color: #D8A7B1;
+}
+
+#about p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Pilihan Buket */
+#menu {
+    padding: 20px;
+    text-align: center;
+}
+
+#menu h2 {
+    font-size: 32px;
+    font-family: 'Dancing Script', cursive;
+    color: #FF6F61;
+    margin-bottom: 20px;
+}
+
+.buket-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.buket-item {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.buket-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.buket-item h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.buket-item p {
+    font-size: 16px;
+    color: #FF6F61;
+    margin-bottom: 10px;
+}
+
+.buket-item button {
+    padding: 10px;
+    background-color: #FF6F61;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.buket-item button:hover {
+    background-color: #ff3b2e;
+}
+
+/* Kontak Kami */
+#contact {
+    padding: 20px;
+    background-color: #FFDAB9;
+    text-align: center;
+}
+
+#contact h2 {
+    font-size: 32px;
+    font-family: 'Dancing Script', cursive;
+    color: #D8A7B1;
+    margin-bottom: 20px;
+}
+
+.contact-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.contact-item i {
+    font-size: 24px;
+    color: #FF6F61;
+}
+
+.contact-item a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-item a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #D8A7B1;
+    color: white;
+    font-size: 14px;
+}
+
+/* Halaman Transaksi */
+#transaksi {
+    padding: 20px;
+    text-align: center;
+}
+
+#transaksi h2 {
+    font-size: 32px;
+    font-family: 'Dancing Script', cursive;
+    color: #FF6F61;
+    margin-bottom: 20px;
+}
+
+#order-summary {
+    background: white;
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 600px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#order-summary p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+#checkout-form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#checkout-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+#checkout-form input,
+#checkout-form textarea,
+#checkout-form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#checkout-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #FF6F61;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#checkout-form button:hover {
+    background-color: #ff3b2e;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #D8A7B1;
+    color: white;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Kontak */
+#contact form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+textarea.form-control {
+    resize: none;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #FFC107; /* Warna kuning */
+    color: #000;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #e0a800; /* Warna kuning lebih gelap */
+}
+
+/* Contact List */
+.contact-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.contact-item i {
+    font-size: 24px;
+    color: #FF6F61;
+}
+
+.contact-item a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-item a:hover {
+    text-decoration: underline;
+}
