@@ -1,49 +1,60 @@
+<?php
+session_start();
+include 'koneksi.php';
+
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+
+    if ($row) {
+        $_SESSION['user_id'] = $row['id'];
+        $_SESSION['role'] = $row['role'];
+        if ($row['role'] == 'admin') {
+            header("Location: php/admin.php");
+        } else {
+            header("Location: home.php");
+        }
+    } else {
+        echo "<script>alert('Username atau password salah!');</script>";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buket Bunga</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Roboto:wght@400;500&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="css/stayle.css">
+    <link rel="stylesheet" href="css/stayleb.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <title>Login Page</title>
 </head>
 
 <body>
-    <!-- Navbar -->
-    <header>
-        <nav>
-            <div class="logo">Byouqet</div>
-            <ul class="nav-links">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="about.php">Tentang Kami</a></li>
-                <li><a href="menu.php">Menu</a></li>
-                <li><a href="contact.php">Kontak</a></li>
-                <li id="auth-link"><a href="login.php">Login</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-image">
-            <img src="foto/bg.jpg" alt="Buket Besar">
-        </div>
-        <div class="hero-content">
-            <h1>Selamat Datang di Toko Buket Kami</h1>
-            <p>Temukan Buket Bunga Terindah untuk Setiap Momen</p>
-            <button id="order-now" class="order-button">Order Sekarang</button>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>© 2024 BYOUQET BUNGA. All rights reserved.</p>
+    <div class="input">
+        <h1>LOGIN</h1>
+        <form action="menu.php" method="POST">
+            <div class="box-input">
+                <i class="fas fa-user-circle"></i>
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+            <div class="box-input">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn-input">Login</button>
+            <div class="bottom">
+                <p>Belum punya akun?
+                    <a href="register.html">Register disini</a>
+                </p>
+            </div>
+        </form>
     </div>
-
-    <script src="js/script.js"></script>
 </body>
 
 </html>
