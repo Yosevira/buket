@@ -25,32 +25,43 @@ if (!$user) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil</title>
+    <title>Profil Pengguna</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/stayle.css">
+    <link rel="stylesheet" href="stayle.css">
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 
 <body>
     <!-- Navbar -->
     <header>
-        <nav>
-            <div class="logo">Buket Bunga</div>
-            <ul class="nav-links">
-                <li><a href="home.php">Home</a></li>
-                <li><a href="menu.php">Menu</a></li>
-                <li><a href="contact.php">Kontak</a></li>
-                <li><a href="logout.php" id="logout-btn">Logout</a></li>
-            </ul>
+    <nav>
+            <div class="logo">Byouqet</div>
+                <ul class="nav-links">
+                    <div id="home" class="hidden">
+                        <a href="home.php">Home</a>
+                        <a href="about.php">Tentang Kami</a>
+                        <a href="menu.php">Menu</a>
+                        <a href="contact.php">Kontak Kami</a>
+                        <a href="logout.php" class="icon-link"><i data-feather="log-out"></i></a>
+                    </div>
+                </ul>
         </nav>
     </header>
 
     <!-- Bagian Profil -->
     <section id="profil">
-        <h2>Profil Pengguna</h2>
-        <div class="profil-info">
-            <p><strong>Email:</strong> <?= htmlspecialchars($user['email']); ?></p>
-            <p><strong>Full Name:</strong> <?= htmlspecialchars($user['fullname']); ?></p>
-            <p><strong>Riwayat Transaksi:</strong> <a href="riwayat.php">Lihat Riwayat</a></p>
+        <div class="profil-container">
+            <h2><i data-feather="user"></i> Profil Pengguna</h2>
+            <div class="profil-info">
+                <p><i data-feather="user"></i> <strong> Full Name :  </strong> <?= htmlspecialchars($user['fullname']); ?></p>
+                <p><i data-feather="mail"></i> <strong> Email : </strong> <?= htmlspecialchars($user['email']); ?></p>
+                <p><i data-feather="map-pin"></i> <strong> Alamat : </strong> <?= htmlspecialchars($user['alamat']); ?></p>
+                <p><i data-feather="phone"></i> <strong> Nomor Telepon : </strong> <?= htmlspecialchars($user['no_telepon']); ?></p>
+                <p><i data-feather="clock"></i> <strong> Riwayat Transaksi : </strong> <a href="riwayat.php">Lihat Riwayat</a></p>
+            </div>
+            <div class="edit-button">
+                <a href="edit_profil.php" class="btn"><i data-feather="edit"></i> Edit Profil</a>
+            </div>
         </div>
     </section>
 
@@ -58,6 +69,9 @@ if (!$user) {
     <footer>
         <p>© 2024 BYOUQET BUNGA. All rights reserved.</p>
     </footer>
+    <script>
+        feather.replace();
+    </script>
 </body>
 
 </html>

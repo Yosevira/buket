@@ -68,30 +68,6 @@ if (document.getElementById('order-summary')) {
     totalPriceElem.value = `Rp${total.toLocaleString()}`; // Tampilkan total harga
 }
 
-// Proses checkout di halaman transaksi
-if (document.getElementById('checkout-form')) {
-    document.getElementById('checkout-form').addEventListener('submit', (e) => {
-        e.preventDefault(); // Mencegah reload halaman saat form disubmit
-        const name = e.target.fullname.value; // Ambil nama dari form
-        const address = e.target.address.value; // Ambil alamat dari form
-        const totalPrice = document.getElementById('total-price').value; // Ambil total harga
-        const paymentMethod = e.target['payment-method'].value; // Ambil metode pembayaran
-
-        // Buat pesan untuk dikirim ke WhatsApp
-        const message = `
-            Nama Pemesan: ${name}
-            Alamat: ${address}
-            Total: ${totalPrice}
-            Pembayaran: ${paymentMethod}
-        `;
-        window.open(`https://wa.me/6285231569104?text=${encodeURIComponent(message)}`); // Ganti "nomor_wa_anda" dengan nomor WhatsApp Anda
-
-        localStorage.removeItem('cart'); // Kosongkan keranjang
-        alert('Pesanan berhasil diproses!');
-        window.location.href = 'menu.php'; // Kembali ke menu
-    });
-}
-
 // Cek status login di halaman menu atau transaksi
 const currentPage = window.location.pathname.split('/').pop();
 if (!isLoggedIn && (currentPage === 'menu.php' || currentPage === 'transaksi.html')) {

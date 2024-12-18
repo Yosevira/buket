@@ -10,50 +10,6 @@
         rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
     <link rel="stylesheet" href="stayle.css">
-    <style>
-    #contact {
-        padding: 20px;
-        background-color: #f0a5ce !important;
-        text-align: center;
-        font-weight: bold;
-    }
-
-    #contact h2 {
-        font-size: 52px;
-        font-family: 'Dancing Script', cursive;
-        color: #fcf9f9;
-        margin-bottom: 20px;
-    }
-
-    .contact-list {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-
-    .contact-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 16px;
-    }
-
-    .contact-item i {
-        font-size: 24px;
-        color: #FF6F61;
-    }
-
-    .contact-item a {
-        color: #333;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    .contact-item a:hover {
-        text-decoration: underline;
-    }
-    </style>
 </head>
 
 <body>

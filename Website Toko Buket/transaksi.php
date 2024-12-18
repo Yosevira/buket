@@ -8,6 +8,9 @@ if (!isset($_SESSION['user_id'])) {
 
 // Ambil total harga dari sesi
 $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
+
+// Ambil data produk dari sesi checkout
+$checkout_products = isset($_SESSION['checkout_products']) ? $_SESSION['checkout_products'] : [];
 ?>
 
 <!DOCTYPE html>
@@ -71,29 +74,38 @@ $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
 
     <script>
         document.getElementById('checkout-form').addEventListener('submit', function(event) {
-            event.preventDefault();
+    event.preventDefault();
 
-            // Ambil data dari form
-            const name = document.querySelector('input[name="fullname"]').value;
-            const address = document.querySelector('textarea[name="address"]').value;
-            const paymentMethod = document.querySelector('select[name="payment-method"]').value;
-            const totalPrice = document.getElementById('total-price').value;
+    const name = document.querySelector('input[name="fullname"]').value;
+    const address = document.querySelector('textarea[name="address"]').value;
+    const paymentMethod = document.querySelector('select[name="payment-method"]').value;
+    const totalPrice = document.getElementById('total-price').value;
 
-            // Ambil produk dari keranjang
-            fetch('keranjang_produk.php')
-                .then(response => response.json())
-                .then(data => {
-                    const products = data.products.map(item => `- ${item.name} (${item.quantity} x Rp ${item.price.toLocaleString('id-ID')})`).join('%0A');
+    // Data produk dari PHP
+    const products = <?php echo json_encode($checkout_products); ?>;
 
-                    // Format pesan WhatsApp
-                    const whatsappUrl = 
-                        `https://wa.me/6285231569104?text=Nama:%20${encodeURIComponent(name)}%0AAlamat:%20${encodeURIComponent(address)}%0AProduk:%0A${products}%0ATotal:%20${encodeURIComponent(totalPrice)}%0AMetode%20Pembayaran:%20${encodeURIComponent(paymentMethod)}`;
+    if (products.length > 0) {
+        const productDetails = products
+            .map(item => `- ${item.name} (${item.quantity} x Rp ${item.price.toLocaleString('id-ID')})`)
+            .join('%0A');
 
-                    // Buka WhatsApp
-                    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-                })
-                .catch(error => console.error('Error fetching cart products:', error));
-        });
+        const whatsappUrl = 
+            `https://wa.me/6285231569104?text=Nama:%20${encodeURIComponent(name)}%0AAlamat:%20${encodeURIComponent(address)}%0AProduk:%0A${productDetails}%0ATotal:%20${encodeURIComponent(totalPrice)}%0AMetode%20Pembayaran:%20${encodeURIComponent(paymentMethod)}`;
+
+        // Buka WhatsApp
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+        // Hapus data checkout dari sesi setelah pembayaran
+        fetch('transaksi_clear.php')
+            .then(() => {
+                alert('Pesanan Anda telah dikirim. Terima kasih!');
+                window.location.href = 'menu.php';
+            })
+            .catch(err => console.error('Error:', err));
+    } else {
+        alert('Tidak ada produk untuk diproses.');
+    }
+});
     </script>
 </body>
 </html>
