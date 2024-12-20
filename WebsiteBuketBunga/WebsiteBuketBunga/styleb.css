@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url('foto/bg\ awal.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Dancing Script', cursive, sans-serif;
+    color: #5D4037; /* Warna coklat bunga */
+}
+
+.input {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 245, 238, 0.9); /* Warna pastel peach */
+    padding: 50px;
+    width: 320px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.input h1 {
+    text-align: center;
+    color: #D81B60; /* Pink cerah */
+    font-size: 30px;
+    font-family: 'Dancing Script', cursive;
+    letter-spacing: 3px;
+    padding-top: 0;
+    margin-top: -20px;
+}
+
+.box-input {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    border-bottom: 2px solid #D81B60; /* Garis bawah pink cerah */
+    padding: 8px 0;
+}
+
+.box-input i {
+    font-size: 23px;
+    color: #D81B60; /* Pink cerah */
+    padding: 5px 0;
+}
+
+.box-input input {
+    width: 85%;
+    padding: 5px 0;
+    background: none;
+    border: none;
+    outline: none;
+    color: #5D4037; /* Coklat bunga */
+    font-size: 18px;
+}
+
+.box-input input::placeholder {
+    color: #A1887F; /* Warna coklat lembut */
+}
+
+.box-input input:hover {
+    background: rgba(255, 182, 193, 0.2); /* Latar pink lembut */
+}
+
+.btn-input {
+    margin-left: 10px;
+    margin-bottom: 20px;
+    background: none;
+    border: 1px solid #D81B60; /* Warna pink cerah */
+    width: 92.5%;
+    padding: 10px;
+    color: #D81B60; /* Warna pink cerah */
+    font-size: 18px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 10px;
+}
+
+.btn-input:hover {
+    background: #D81B60; /* Pink cerah */
+    color: white;
+}
+
+.bottom {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: -20px;
+}
+
+.bottom p {
+    color: #6D4C41; /* Coklat medium */
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.bottom a {
+    color: #388E3C; /* Hijau daun */
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.bottom a:hover {
+    text-decoration: underline;
+}
