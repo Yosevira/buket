@@ -76,7 +76,7 @@ header nav, nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 0px 10px;
     background-color: #D8A7B1; /* Warna romantis */
     color: white;
 }
@@ -92,9 +92,9 @@ header .logo, nav .logo {
     gap: 20px;
 }
 
-.nav-links a, #menu, #home, #tentang , #kontak a {
+.nav-links a, #menu, #home, #tentang, #kontak a {
     color: white;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     text-decoration: none;
     transition: color 0.3s;
@@ -102,6 +102,184 @@ header .logo, nav .logo {
 
 .nav-links a:hover, #menu, #home, #tentang , #kontak a:hover {
     color: #ffe6e6;
+}
+/* ======================== */
+/* BAGIAN HALAMAN PROFIL    */
+/* ======================== */
+
+/* Global Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header {
+    background-color: #D8A7B1;
+    padding: 10px 0;
+    text-align: center;
+    color: #fff;
+}
+
+header .logo {
+    font-family: 'Dancing Script';
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-links li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.profil-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profil-container h2 {
+    text-align: center;
+    color: #D8A7B1;
+}
+
+.profil-info {
+    line-height: 2;
+}
+
+.profil-info p {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    margin: 10px 110px;
+}
+
+.profil-info i {
+    margin-right: 10px;
+    color: #007bff;
+}
+
+.edit-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.edit-button .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s linear;
+}
+
+.edit-button .btn:hover {
+    background: #D8A7B1;
+}
+
+.profil-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.profil-form label {
+    font-weight: 600;
+    color: #555;
+}
+
+.profil-form input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
+
+.profil-form input:focus {
+    border: 1px solid #D8A7B1;
+    outline: none;
+}
+
+.btn-submit {
+    background-color: #D8A7B1;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #b37989;
+    color: #fff;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a.back-btn {
+    display: inline-flex;
+    align-items: center;
+    color: #fff;
+    background-color: #D8A7B1;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.nav-links a.back-btn:hover {
+    background-color: #b37989;
+    color: #fff;
+}
+
+.nav-links a i {
+    margin-right: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+    color: #fff;
+    margin-top: 30px;
 }
 
 /* ======================== */
@@ -192,9 +370,10 @@ header .logo, nav .logo {
 /* BAGIAN KONTAK KAMI (HALAMAN CONTACT) */
 /* ======================== */
 #contact {
-    padding: 20px;
+    padding: 48px;
     background-color: #f0a5ce !important; /* Warna latar belakang */
-    text-align: left;
+    font-weight: bold;
+    text-align: center;
 }
 
 #contact h2 {
@@ -359,7 +538,7 @@ form {
 
 form input, form textarea, form button {
     width: calc(90% - 20px);
-    margin: 10px 10px 20px;
+    margin: 10px 15px 10px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -421,8 +600,8 @@ footer {
     text-align: center;
     margin-top: 20px;
     padding: 10px;
-    background: #007bff;
-    color: #fff;
+    background: #ffffff;
+    color: #000000;
     position: fixed;
     width: 100%;
     bottom: 0;

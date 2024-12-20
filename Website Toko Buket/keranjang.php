@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 // Periksa apakah pengguna sudah login
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php?message=NotLoggedIn");
@@ -21,9 +22,12 @@ foreach ($cart as $item) {
 // Simpan total harga ke sesi agar bisa digunakan di transaksi.php
 $_SESSION['total_price'] = $total;
 
-// Hapus keranjang setelah checkout
-if (isset($_SESSION['cart'])) {
-    unset($_SESSION['cart']);
+// Tambahkan ini sebelum menghapus keranjang
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
+    $_SESSION['checkout_products'] = $cart; // Salin produk ke sesi checkout
+    unset($_SESSION['cart']); // Hapus keranjang
+    header("Location: transaksi.php"); // Redirect ke halaman transaksi
+    exit();
 }
 
 // Ambil total harga dari sesi
@@ -113,7 +117,7 @@ $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
 
         .cart-buttons button {
             padding: 5px 5px;
-            font-size: 16px;
+            font-size: 20px;
             background: #28a745;
             color: white;
             border: none;
@@ -132,6 +136,24 @@ $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
         .cart-buttons .back-button:hover {
             background: #e0a800;
         }
+
+        /* Tambahan CSS untuk Tombol */
+        .cart-container a {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s ease;
+        }
+
+        .cart-container a:hover {
+        background-color: #0056b3;
+        }
+
     </style>
 </head>
 
@@ -154,16 +176,13 @@ $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
                             <p>Jumlah: <?= htmlspecialchars($item['quantity']); ?></p>
                         </div>
                         <div class="cart-item-actions">
-                            <form action="keranjang_update.php" method="POST">
-                                <input type="hidden" name="index" value="<?= $index; ?>">
-                                <input type="number" name="quantity" min="1" value="<?= htmlspecialchars($item['quantity']); ?>">
-                                <button type="submit">Ubah Jumlah</button>
-                            </form>
-                            <form action="keranjang_hapus.php" method="POST">
-                                <input type="hidden" name="index" value="<?= $index; ?>">
-                                <button type="submit">Hapus</button>
-                            </form>
+                        <!-- Tombol Ubah Jumlah -->
+                            <input type="number" class="update-quantity" data-index="<?= $index; ?>" min="1" value="<?= htmlspecialchars($item['quantity']); ?>">
+                            <button class="update-btn" data-index="<?= $index; ?>">Ubah Jumlah</button>
+                        <!-- Tombol Hapus Produk -->
+                            <button class="delete-btn" data-index="<?= $index; ?>">Hapus</button>
                         </div>
+
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -175,11 +194,40 @@ $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
             </div>
 
             <div class="cart-buttons">
-                <button class="back-button" onclick="window.location.href='menu.php'">Kembali ke Menu</button>
-                <button onclick="window.location.href='transaksi.php'">Checkout</button>
+                    <button class="back-button" onclick="window.location.href='menu.php'">Kembali ke Menu</button>
+                <!-- Tombol Checkout mengirim POST -->
+                <form action="keranjang.php" method="POST">
+                    <button type="submit" name="checkout">Checkout</button>
+                </form>
             </div>
+
         <?php endif; ?>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Ubah Jumlah Produk
+    $('.update-btn').click(function(e) {
+        e.preventDefault();
+        let index = $(this).data('index');
+        let quantity = $(this).siblings('.update-quantity').val();
+
+        $.post('keranjang_update.php', { index: index, quantity: quantity }, function(response) {
+            location.reload(); // Refresh bagian keranjang saja
+        });
+    });
+
+    // Hapus Produk
+    $('.delete-btn').click(function(e) {
+        e.preventDefault();
+        let index = $(this).data('index');
+
+        $.post('keranjang_hapus.php', { index: index }, function(response) {
+            location.reload(); // Refresh bagian keranjang saja
+        });
+    });
+});
+</script>
 
 </html>
