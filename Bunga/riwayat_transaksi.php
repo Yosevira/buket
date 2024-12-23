@@ -2,29 +2,33 @@
 session_start();
 include 'koneksi.php';
 
-// Cek apakah pengguna adalah admin
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+// Validasi apakah pengguna sudah login
+if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
 }
 
-// Ambil riwayat transaksi
+// Ambil riwayat transaksi pengguna yang sedang login
+$user_id = $_SESSION['user_id'];
 $query = "SELECT transaksi.kode_pesanan AS transaksi_id, transaksi.created_at, transaksi.total, 
                 users.fullname, users.email
         FROM transaksi 
         INNER JOIN users ON transaksi.user_id = users.id 
+        WHERE transaksi.user_id = '$user_id'
         ORDER BY transaksi.created_at DESC";
 $result = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riwayat Transaksi</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="admin-container">
         <h1>Riwayat Transaksi</h1>
@@ -53,4 +57,5 @@ $result = mysqli_query($conn, $query);
         </table>
     </div>
 </body>
+
 </html>

@@ -66,19 +66,23 @@ if (!$result) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Buket Bunga</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
     <link rel="stylesheet" href="style.css">
     <style>
-        @keyframes fly-to-cart {
+    @keyframes fly-to-cart {
         0% {
             opacity: 1;
             transform: translate(0, 0) scale(1);
         }
+
         50% {
             opacity: 0.7;
             transform: translate(calc(50vw - 50%), calc(50vh - 50%)) scale(0.5);
         }
+
         100% {
             opacity: 0;
             transform: translate(var(--cart-x), var(--cart-y)) scale(0.2);
@@ -91,18 +95,31 @@ if (!$result) {
         z-index: 9999;
         animation: fly-to-cart 1s ease-in-out forwards;
     }
-        body, html {
-            background-color: #f4f4f9;
-        }
 
-        .footer {
-            background-color: #f4f4f9; /* Warna latar belakang footer */
-            color: #000; /* Warna teks footer */
-        }
+    body,
+    html {
+        background-color: #f4f4f9;
+    }
 
-        .cart-icon {
-            cursor: pointer;
-        }
+    .footer {
+        background-color: #f4f4f9;
+        /* Warna latar belakang footer */
+        color: #000;
+        /* Warna teks footer */
+    }
+
+    .cart-icon {
+        cursor: pointer;
+    }
+
+    h1,
+    h2 {
+        font-size: 35px;
+        font-family: 'Dancing Script', cursive;
+        /* Font untuk logo */
+        font-weight: bold;
+        color: #f0a5ce;
+    }
     </style>
 </head>
 
@@ -119,7 +136,8 @@ if (!$result) {
                     <a href="contact.php">Kontak Kami</a>
                     <a href="profil.php" class="icon-link"><i data-feather="user"></i></a>
                     <a href="logout.php" class="icon-link"><i data-feather="log-out"></i></a>
-                    <a href="keranjang.php" class="icon-link" id="shoppingCartIcon"><i data-feather="shopping-cart"></i></a>
+                    <a href="keranjang.php" class="icon-link" id="shoppingCartIcon"><i
+                            data-feather="shopping-cart"></i></a>
                 </div>
             </ul>
         </nav>
@@ -129,11 +147,11 @@ if (!$result) {
     <headerh1 h1>
         <h1>Menu Produk</h1>
         <h2>Pilih buket bunga terbaik untuk momen spesial Anda!</h2>
-    </header h1>
+        </header h1>
 
-    <!-- Daftar Produk -->
-    <div class="buket-list">
-        <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+        <!-- Daftar Produk -->
+        <div class="buket-list">
+            <?php while ($row = mysqli_fetch_assoc($result)) { ?>
             <div class="buket-item">
                 <img src="foto/<?= htmlspecialchars($row['image']); ?>" alt="<?= htmlspecialchars($row['name']); ?>">
                 <h3><?= htmlspecialchars($row['name']); ?></h3>
@@ -145,59 +163,59 @@ if (!$result) {
                     <button type="submit" class="add-to-cart">Tambah ke Keranjang</button>
                 </form>
             </div>
-        <?php } ?>
-    </div>
+            <?php } ?>
+        </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        <p>© 2024 BYOUQET BUNGA. All rights reserved.</p>
-    </div>
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2024 BYOUQET BUNGA. All rights reserved.</p>
+        </div>
 
-    <!-- JavaScript -->
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const cartIcon = document.getElementById('shoppingCartIcon');
+        <!-- JavaScript -->
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartIcon = document.getElementById('shoppingCartIcon');
 
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', event => {
-                event.preventDefault(); // Cegah form submit langsung
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', event => {
+                    event.preventDefault(); // Cegah form submit langsung
 
-                const productItem = button.closest('.buket-item');
-                const productImage = productItem.querySelector('img');
+                    const productItem = button.closest('.buket-item');
+                    const productImage = productItem.querySelector('img');
 
-                // Salin gambar produk untuk animasi
-                const flyImage = productImage.cloneNode(true);
-                const rect = productImage.getBoundingClientRect();
-                const cartRect = cartIcon.getBoundingClientRect();
+                    // Salin gambar produk untuk animasi
+                    const flyImage = productImage.cloneNode(true);
+                    const rect = productImage.getBoundingClientRect();
+                    const cartRect = cartIcon.getBoundingClientRect();
 
-                // Set posisi awal gambar
-                flyImage.style.position = 'fixed';
-                flyImage.style.left = `${rect.left}px`;
-                flyImage.style.top = `${rect.top}px`;
-                flyImage.style.width = `${rect.width}px`;
-                flyImage.style.height = `${rect.height}px`;
-                flyImage.classList.add('fly-animation');
+                    // Set posisi awal gambar
+                    flyImage.style.position = 'fixed';
+                    flyImage.style.left = `${rect.left}px`;
+                    flyImage.style.top = `${rect.top}px`;
+                    flyImage.style.width = `${rect.width}px`;
+                    flyImage.style.height = `${rect.height}px`;
+                    flyImage.classList.add('fly-animation');
 
-                // Hitung posisi akhir menuju ikon keranjang
-                flyImage.style.setProperty('--cart-x', `${cartRect.left - rect.left}px`);
-                flyImage.style.setProperty('--cart-y', `${cartRect.top - rect.top}px`);
+                    // Hitung posisi akhir menuju ikon keranjang
+                    flyImage.style.setProperty('--cart-x', `${cartRect.left - rect.left}px`);
+                    flyImage.style.setProperty('--cart-y', `${cartRect.top - rect.top}px`);
 
-                // Tambahkan gambar ke dokumen untuk animasi
-                document.body.appendChild(flyImage);
+                    // Tambahkan gambar ke dokumen untuk animasi
+                    document.body.appendChild(flyImage);
 
-                // Hapus elemen setelah animasi selesai
-                flyImage.addEventListener('animationend', () => {
-                    document.body.removeChild(flyImage);
+                    // Hapus elemen setelah animasi selesai
+                    flyImage.addEventListener('animationend', () => {
+                        document.body.removeChild(flyImage);
 
-                    // Lakukan submit form ke server setelah animasi
-                    button.closest('form').submit();
+                        // Lakukan submit form ke server setelah animasi
+                        button.closest('form').submit();
+                    });
                 });
             });
         });
-    });
 
         feather.replace();
-    </script>
+        </script>
 </body>
 
 </html>
