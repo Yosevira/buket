@@ -670,6 +670,35 @@ footer {
 .edit-button:hover {
     background-color: #ffffff; /* Warna biru lebih gelap saat hover */
 }
+.success, .error {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 15px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease-in-out;
+}
+
+.success {
+    background-color: #d4edda; /* Hijau muda */
+    color: #155724; /* Hijau gelap */
+    border: 1px solid #c3e6cb; /* Border hijau */
+}
+
+.error {
+    background-color: #f8d7da; /* Merah muda */
+    color: #721c24; /* Merah gelap */
+    border: 1px solid #f5c6cb; /* Border merah */
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
 
 /* Tombol Hapus */
 .delete-button {

@@ -24,13 +24,14 @@ if (isset($_POST['add_product'])) {
         exit();
     }
 
-    $stmt = $conn->prepare("INSERT INTO produk (name, price, description, image) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sdss", $name, $price, $description, $image);
+    $category_id = intval($_POST['category_id']); // Ambil nilai dari form
+$stmt = $conn->prepare("INSERT INTO produk (name, price, description, image, category_id) VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("sdssi", $name, $price, $description, $image, $category_id);
 
     if ($stmt->execute() && move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-        header("Location: admin.php?success=product_added");
+        header("Location: admin.php?success=product added");
     } else {
-        header("Location: admin.php?error=product_add_failed");
+        header("Location: admin.php?error=product add failed");
     }
     $stmt->close();
     exit();
@@ -43,9 +44,9 @@ if (isset($_GET['delete_id'])) {
     $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
-        header("Location: admin.php?success=product_deleted");
+        header("Location: admin.php?success=product deleted");
     } else {
-        header("Location: admin.php?error=product_delete_failed");
+        header("Location: admin.php?error=product delete failed");
     }
     $stmt->close();
     exit();
@@ -54,17 +55,54 @@ if (isset($_GET['delete_id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Kelola Produk</title>
-    <link rel="stylesheet" href= "style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Kelola Produk</title>
+<link rel="stylesheet" href="style.css">
 <style>
-    body, html{
+body,
+html {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
     color: #333;
     margin: 0;
     padding: 0;
+}
+
+.success,
+.error {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 15px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease-in-out;
+}
+
+.success {
+    background-color: #d4edda;
+    /* Hijau muda */
+    color: #155724;
+    /* Hijau gelap */
+    border: 1px solid #c3e6cb;
+    /* Border hijau */
+}
+
+.error {
+    background-color: #f8d7da;
+    /* Merah muda */
+    color: #721c24;
+    /* Merah gelap */
+    border: 1px solid #f5c6cb;
+    /* Border merah */
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
 }
 </style>
 </head>
@@ -83,39 +121,50 @@ if (isset($_GET['delete_id'])) {
 
             <!-- Notifikasi -->
             <?php if (isset($_GET['success'])): ?>
-                <p class="success"><?= htmlspecialchars($_GET['success']) ?></p>
+            <p class="success"><?= htmlspecialchars($_GET['success']) ?></p>
             <?php elseif (isset($_GET['error'])): ?>
-                <p class="error"><?= htmlspecialchars($_GET['error']) ?></p>
+            <p class="error"><?= htmlspecialchars($_GET['error']) ?></p>
             <?php endif; ?>
 
             <!-- Form Tambah Produk -->
             <form method="POST" enctype="multipart/form-data" class="admin-form">
                 <label for="name">Nama Produk</label>
                 <input type="text" id="name" name="name" placeholder="Nama Produk" required>
-                
+
                 <label for="price">Harga</label>
                 <input type="number" id="price" name="price" placeholder="Harga" step="0.01" required>
-                
+
                 <label for="description">Deskripsi</label>
                 <textarea id="description" name="description" placeholder="Deskripsi" required></textarea>
-                
+
                 <label for="image">Gambar</label>
                 <input type="file" id="image" name="image" accept="image/*" required>
-                
-                <button type="submit" name="add_product">Tambah Produk</button>
+
+                <label for="category">Kategori</label>
+                <select id="category" name="category_id" required>
+                    <?php
+        // Query untuk mengambil data kategori
+        $categories = mysqli_query($conn, "SELECT * FROM categories");
+        while ($cat = mysqli_fetch_assoc($categories)) {
+            echo "<option value='{$cat['id']}'>{$cat['nama_kategori']}</option>";
+        }
+        ?>
+                </select>
+
+                <button <button type="submit" name="add_product">Tambah Produk</button>
             </form>
 
             <!-- Daftar Produk -->
             <h2>Daftar Produk</h2>
             <table>
-            <tr>
-                <th>Nama</th>
-                <th>Harga</th>
-                <th>Deskripsi</th>
-                <th>Gambar</th>
-                <th>Aksi</th>
-            </tr>
-            <?php
+                <tr>
+                    <th>Nama</th>
+                    <th>Harga</th>
+                    <th>Deskripsi</th>
+                    <th>Gambar</th>
+                    <th>Aksi</th>
+                </tr>
+                <?php
         $products = mysqli_query($conn, "SELECT * FROM produk");
             while ($row = mysqli_fetch_assoc($products)) {
         echo "<tr>
