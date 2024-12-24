@@ -10,27 +10,32 @@
         rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+    .footer {
+        background-color: white;
+    }
+    </style>
 </head>
 
 <body>
     <header>
         <nav>
             <div class="logo">Byouqet</div>
-                <ul class="nav-links">
-                    <div id="kontak" class="hidden">
-                        <a href="home.php">Home</a>
-                        <a href="about.php">Tentang Kami</a>
-                        <a href="menu.php">Menu</a>
-                        <a href="contact.php">Kontak Kami</a>
-                        <a href="profil.php" class="icon-link"><i data-feather="user"></i></a>
-                        <a href="logout.php" class="icon-link"><i data-feather="log-out"></i></a>
-                    </div>
-                </ul>
+            <ul class="nav-links">
+                <div id="kontak" class="hidden">
+                    <a href="home.php">Home</a>
+                    <a href="about.php">Tentang Kami</a>
+                    <a href="menu.php">Menu</a>
+                    <a href="contact.php">Kontak Kami</a>
+                    <a href="profil.php" class="icon-link"><i data-feather="user"></i></a>
+                    <a href="logout.php" class="icon-link"><i data-feather="log-out"></i></a>
+                </div>
+            </ul>
         </nav>
     </header>
     <section id="contact">
-        <h2>Kontak Kami</h2>
         <div class="content">
+            <h1>Kontak Kami</h1>
             <form id="contactForm">
                 <div class="form-group"><label for="name" data-key="name">Nama</label><input type="text"
                         class="form-control" id="name" placeholder="Nama Anda" required></div>
@@ -48,7 +53,8 @@
                     href="https://instagram.com/byouqet">Instagram</a></div>
             <div class="contact-item"><i data-feather="facebook"></i><a href="https://facebook.com/byouqet">Facebook</a>
             </div>
-            <div class="contact-item"><i data-feather="mail"></i><a href="byouqet@gmail.com?subject=Halo%20Byouqet&body=Halo%20tim%20Byouqet,%20saya%20ingin%20bertanya%20mengenai...">Email</a>
+            <div class="contact-item"><i data-feather="mail"></i><a
+                    href="byouqet@gmail.com?subject=Halo%20Byouqet&body=Halo%20tim%20Byouqet,%20saya%20ingin%20bertanya%20mengenai...">Email</a>
             </div>
     </section>
     <div class="footer">

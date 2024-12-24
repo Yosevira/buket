@@ -59,112 +59,70 @@ if (isset($_GET['delete_id'])) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin - Kelola Produk</title>
 <link rel="stylesheet" href="style.css">
-<style>
-body,
-html {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
 
-.success,
-.error {
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 15px 20px;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.3s ease-in-out;
-}
-
-.success {
-    background-color: #d4edda;
-    /* Hijau muda */
-    color: #155724;
-    /* Hijau gelap */
-    border: 1px solid #c3e6cb;
-    /* Border hijau */
-}
-
-.error {
-    background-color: #f8d7da;
-    /* Merah muda */
-    color: #721c24;
-    /* Merah gelap */
-    border: 1px solid #f5c6cb;
-    /* Border merah */
-}
-
-.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-</style>
 </head>
 
-<body>
-    <div class="admin-container">
-        <div class="admin-sidebar">
-            <h2>Admin Panel</h2>
-            <ul>
-                <li><a href="logout.php" class="logout-button">Logout</a></li>
-                <li><a href="riwayat_transaksi.php" class="riwayat-trx">Riwayat Transaksi</a></li>
-            </ul>
-        </div>
-        <div class="admin-content">
-            <h1>Kelola Produk</h1>
+<div class="admin-container">
+    <h1>ADMIN PANEL</h1>
+    <div class="admin-menu">
+        <a href="riwayat_transaksi.php" class="riwayat-trx">Riwayat Transaksi</a>
+        <a href="logout.php" class="logout-button">Logout</a>
+    </div>
+</div>
 
-            <!-- Notifikasi -->
-            <?php if (isset($_GET['success'])): ?>
-            <p class="success"><?= htmlspecialchars($_GET['success']) ?></p>
-            <?php elseif (isset($_GET['error'])): ?>
-            <p class="error"><?= htmlspecialchars($_GET['error']) ?></p>
-            <?php endif; ?>
+<div class="admin-content">
+    <h2 class="judul-produk">Kelola Produk</h2>
+    <!-- Konten lainnya -->
 
-            <!-- Form Tambah Produk -->
-            <form method="POST" enctype="multipart/form-data" class="admin-form">
-                <label for="name">Nama Produk</label>
-                <input type="text" id="name" name="name" placeholder="Nama Produk" required>
 
-                <label for="price">Harga</label>
-                <input type="number" id="price" name="price" placeholder="Harga" step="0.01" required>
+    <!-- Notifikasi -->
+    <?php if (isset($_GET['success'])): ?>
+    <p class="success"><?= htmlspecialchars($_GET['success']) ?></p>
+    <?php elseif (isset($_GET['error'])): ?>
+    <p class="error"><?= htmlspecialchars($_GET['error']) ?></p>
+    <?php endif; ?>
 
-                <label for="description">Deskripsi</label>
-                <textarea id="description" name="description" placeholder="Deskripsi" required></textarea>
+    <!-- Form Tambah Produk -->
+    <form method="POST" enctype="multipart/form-data" class="admin-form">
+        <label for="name">Nama Produk</label>
+        <input type="text" id="name" name="name" placeholder="Nama Produk" required>
 
-                <label for="image">Gambar</label>
-                <input type="file" id="image" name="image" accept="image/*" required>
+        <label for="price">Harga</label>
+        <input type="number" id="price" name="price" placeholder="Harga" step="0.01" required>
 
-                <label for="category">Kategori</label>
-                <select id="category" name="category_id" required>
-                    <?php
+        <label for="description">Deskripsi</label>
+        <textarea id="description" name="description" placeholder="Deskripsi" required></textarea>
+
+        <label for="image">Gambar</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+
+        <label for="category">Kategori</label>
+        <select id="category" name="category_id" required>
+            <?php
         // Query untuk mengambil data kategori
         $categories = mysqli_query($conn, "SELECT * FROM categories");
         while ($cat = mysqli_fetch_assoc($categories)) {
             echo "<option value='{$cat['id']}'>{$cat['nama_kategori']}</option>";
         }
         ?>
-                </select>
+        </select>
 
-                <button <button type="submit" name="add_product">Tambah Produk</button>
-            </form>
+        <button <button type="submit" name="add_product">Tambah Produk</button>
+    </form>
+</div>
 
-            <!-- Daftar Produk -->
-            <h2>Daftar Produk</h2>
-            <table>
-                <tr>
-                    <th>Nama</th>
-                    <th>Harga</th>
-                    <th>Deskripsi</th>
-                    <th>Gambar</th>
-                    <th>Aksi</th>
-                </tr>
-                <?php
+<!-- Daftar Produk -->
+<div class="tabel">
+    <h2>Daftar Produk</h2>
+    <table>
+        <tr>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Deskripsi</th>
+            <th>Gambar</th>
+            <th>Aksi</th>
+        </tr>
+        <?php
         $products = mysqli_query($conn, "SELECT * FROM produk");
             while ($row = mysqli_fetch_assoc($products)) {
         echo "<tr>
@@ -179,9 +137,8 @@ html {
             </tr>";
             }
             ?>
-            </table>
-        </div>
-    </div>
+    </table>
+</div>
 </body>
 
 </html>

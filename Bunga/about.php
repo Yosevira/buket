@@ -11,13 +11,16 @@
     <script src="https://unpkg.com/feather-icons"></script>
     <link rel="stylesheet" href="style.css">
     <style>
-    body, html {
-    background-color: #FFF8F2;
+    body,
+    html {
+        background-color: #FFF8F2;
     }
 
     .footer {
-    background-color: #FFF8F2; /* Warna latar belakang footer */
-    color: #000; /* Warna teks footer */
+        background-color: #FFF8F2;
+        /* Warna latar belakang footer */
+        color: #000;
+        /* Warna teks footer */
     }
     </style>
 </head>
@@ -26,21 +29,21 @@
     <header>
         <nav>
             <div class="logo">Byouqet</div>
-                <ul class="nav-links">
-                    <div id="tentang" class="hidden">
-                        <a href="home.php">Home</a>
-                        <a href="about.php">Tentang Kami</a>
-                        <a href="menu.php">Menu</a>
-                        <a href="contact.php">Kontak Kami</a>
-                        <a href="profil.php" class="icon-link"><i data-feather="user"></i></a>
-                        <a href="logout.php" class="icon-link"><i data-feather="log-out"></i></a>
-                    </div>
-                </ul>
+            <ul class="nav-links">
+                <div id="tentang" class="hidden">
+                    <a href="home.php">Home</a>
+                    <a href="about.php">Tentang Kami</a>
+                    <a href="menu.php">Menu</a>
+                    <a href="contact.php">Kontak Kami</a>
+                    <a href="profil.php" class="icon-link"><i data-feather="user"></i></a>
+                    <a href="logout.php" class="icon-link"><i data-feather="log-out"></i></a>
+                </div>
+            </ul>
         </nav>
     </header>
 
     <section id="about">
-        <h2>Tentang Kami</h2>
+        <h1>Tentang Kami</h1>
         <p>
             Byouqet melayani pesanan bunga buket dengan berbagai varian seperti buket dengan isi snack, uang (asli atau
             palsu),
@@ -62,7 +65,9 @@
     </div>
 
     <script src="script.js"></script>
-    <script>feather.replace();</script>
+    <script>
+    feather.replace();
+    </script>
 </body>
 
 </html>

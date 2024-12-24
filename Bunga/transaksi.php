@@ -67,24 +67,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaksi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        body, html {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        footer {
-            background-color: #FFF8F2; /* Warna latar belakang footer */
-            color: #000; /* Warna teks footer */
-        }
+    body,
+    html {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+    }
+
+    .footer {
+        text-align: center;
+        /* Pusatkan teks */
+        background-color: #f0a5ce;
+        /* Samakan warna background dengan halaman */
+        padding: 1px 0;
+        /* Beri jarak atas dan bawah */
+        margin: 0;
+        /* Hilangkan margin */
+        width: 100%;
+        /* Pastikan lebar penuh */
+        position: relative;
+        /* default */
+        bottom: 0;
+        /* Tempel ke bawah */
+        left: 0;
+        /* Pastikan dari sisi kiri */
+        font-size: 14px;
+        /* Ukuran teks */
+        color: #333;
+        /* Warna teks */
+        margin-top: 20px;
+    }
     </style>
 </head>
+
 <body>
     <header>
         <nav>
@@ -95,11 +120,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </nav>
     </header>
 
-    <section id="transaksi">
+
+    <div id="order-summary">
         <h2>Transaksi</h2>
-        <div id="order-summary">
-            <!-- Produk akan ditampilkan secara dinamis -->
-        </div>
+
+        <!-- Produk akan ditampilkan secara dinamis -->
+
         <form id="checkout-form" method="POST">
             <label>Nama Pemesan:</label>
             <input type="text" name="fullname" required>
@@ -118,10 +144,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </select>
             <button type="submit">Bayar</button>
         </form>
-    </section>
+    </div>
 
-    <footer>
+
+    <div class="footer">
         <p>© 2024 BYOUQET BUNGA. All rights reserved.</p>
-    </footer>
+    </div>
 </body>
+
 </html>

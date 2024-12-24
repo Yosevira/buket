@@ -31,7 +31,14 @@ $result = mysqli_query($conn, $query);
 
 <body>
     <div class="admin-container">
-        <h1>Riwayat Transaksi</h1>
+        <h1>ADMIN PANEL</h1>
+        <div class="admin-menu">
+            <a href="admin.php" class="riwayat-trx">Kembali</a>
+            <a href="logout.php" class="logout-button">Logout</a>
+        </div>
+    </div>
+    <div class="admin-content">
+        <h2>Riwayat Transaksi</h2>
 
         <table>
             <tr>

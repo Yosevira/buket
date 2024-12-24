@@ -146,7 +146,7 @@ if (!$result) {
     <!-- Header -->
     <headerh1 h1>
         <h1>Menu Produk</h1>
-        <h2>Pilih buket bunga terbaik untuk momen spesial Anda!</h2>
+        <h1>Pilih buket bunga terbaik untuk momen spesial Anda!</h1>
         </header h1>
 
         <!-- Daftar Produk -->
