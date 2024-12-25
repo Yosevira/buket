@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Des 2024 pada 16.18
+-- Waktu pembuatan: 25 Des 2024 pada 17.08
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -65,15 +65,11 @@ CREATE TABLE `detail_transaksi` (
 --
 
 INSERT INTO `detail_transaksi` (`id`, `transaksi_id`, `produk_id`, `nama_produk`, `jumlah`, `harga`, `total_harga`) VALUES
-(1, 1, 3, 'Buket Snack', 4, 35000.00, 140000.00),
-(2, 1, 5, 'Buket Uang', 1, 30000.00, 30000.00),
-(3, 2, 2, 'Buket Boneka', 3, 38000.00, 114000.00),
-(4, 2, 1, 'Buket Bunga', 1, 45000.00, 45000.00),
-(5, 3, 3, 'Buket Snack', 3, 35000.00, 105000.00),
-(6, 3, 2, 'Buket Boneka', 3, 38000.00, 114000.00),
-(7, 4, 2, 'Buket Boneka', 5, 38000.00, 190000.00),
-(8, 4, 1, 'Buket Bunga', 1, 45000.00, 45000.00),
-(9, 4, 5, 'Buket Uang', 1, 30000.00, 30000.00);
+(10, 5, 3, 'Buket Snack', 4, 35000.00, 140000.00),
+(11, 5, 2, 'Buket Boneka', 4, 38000.00, 152000.00),
+(12, 5, 6, 'Buket Tulip', 3, 43000.00, 129000.00),
+(13, 6, 1, 'Buket Bunga', 1, 45000.00, 45000.00),
+(14, 6, 6, 'Buket Tulip', 1, 43000.00, 43000.00);
 
 -- --------------------------------------------------------
 
@@ -154,10 +150,8 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id`, `kode_pesanan`, `user_id`, `nama_pemesan`, `total`, `alamat_pengiriman`, `metode_pembayaran`, `created_at`) VALUES
-(1, 'FLGN25AR', 15, 'Bahrudin Rizky Ramadani', 170000.00, 'plemahan', 'dana', '2024-12-19 15:02:58'),
-(2, '7KWGAN3M', 15, 'Bahrudin Rizky Ramadani', 159000.00, 'plemahan', 'ovo', '2024-12-19 15:06:42'),
-(3, 'GKMU2TA7', 15, 'Bahrudin Rizky Ramadani', 219000.00, 'plemahan', 'ovo', '2024-12-19 16:40:25'),
-(4, 'RFDUY2KZ', 15, 'Bahrudin Rizky Ramadani', 265000.00, 'plemahan', 'cod', '2024-12-19 17:07:15');
+(5, '1CMH2ZG5', 16, 'burhanudin', 421000.00, 'plemahan', 'shopee', '2024-12-25 16:05:59'),
+(6, 'YU1KJ5SH', 18, 'aku', 88000.00, 'sugihwaras', 'dana', '2024-12-25 16:07:03');
 
 -- --------------------------------------------------------
 
@@ -182,9 +176,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fullname`, `username`, `email`, `alamat`, `no_telepon`, `password`, `role`, `created_at`) VALUES
-(9, 'PUNYA ADMIN', 'admin', 'admin selalu jago', NULL, NULL, 'admin', 'admin', '2024-12-16 15:15:50'),
-(15, 'bahrudin rizky ramadani', 'bahrudin', 'rudi@gmail.com', 'plemahan, banyuarang, ngoro, jombang', '0881026484748', 'rudi', 'customer', '2024-12-18 10:36:41'),
-(16, 'burhanudin', 'burhan', 'gmgdoni729@gmail.com', NULL, NULL, '$2y$10$B938ltKNTG4Y9H5EUIBRzORorRk4q0qthHzmRZg0i0lYR11fgzC3m', 'customer', '2024-12-25 15:17:14');
+(16, 'burhanudin', 'burhan', 'gmgdoni729@gmail.com', NULL, NULL, '$2y$10$B938ltKNTG4Y9H5EUIBRzORorRk4q0qthHzmRZg0i0lYR11fgzC3m', 'customer', '2024-12-25 15:17:14'),
+(17, 'admin', 'admin', 'ADMIN SELALU JAGO', NULL, NULL, '$2y$10$CLRQf240UvDz2kLccngCqed9cbZ08OAgjltr9MuKKFFSXO8WX9cB.', 'admin', '2024-12-25 16:02:58'),
+(18, 'aku', 'aku', 'aku@aku.aku', NULL, NULL, '$2y$10$o.CRADCyw/aB7Kptt9.Qx.tatzOfcD5XPFgZxwQDmokYz.YWk.jMy', 'customer', '2024-12-25 16:04:54');
 
 --
 -- Indexes for dumped tables
@@ -255,7 +249,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT untuk tabel `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `orders`
@@ -279,13 +273,13 @@ ALTER TABLE `produk`
 -- AUTO_INCREMENT untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
