@@ -84,10 +84,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         color: #333;
     }
 
+    h2 {
+        background-color: #f4f4f9;
+        padding-top: 25px ;
+        padding-bottom: 10px;
+    }
+
     .footer {
         text-align: center;
         /* Pusatkan teks */
-        background-color: #f0a5ce;
+        background-color: #f4f4f9;
         /* Samakan warna background dengan halaman */
         padding: 1px 0;
         /* Beri jarak atas dan bawah */

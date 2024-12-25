@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="style.css">
     <style>
     .footer {
-        background-color: white;
+        background-color: #fff8f2;
     }
     </style>
 </head>

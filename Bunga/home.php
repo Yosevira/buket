@@ -23,11 +23,11 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="style.css">
     <style>
     body, html {
-    background-color: #FFF8F2;
+    background-color: #edcae0;
     }
 
     .footer {
-    background-color: #FFF8F2; /* Warna latar belakang footer */
+    background-color: #edcae0; /* Warna latar belakang footer */
     color: #000; /* Warna teks footer */
     }
     </style>

@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: url('foto/login.png');
+    background: url('foto/login.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -15,7 +15,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: FFF8F2; /* Warna pastel peach */
+    background: #fff8f2f3; /* Warna pastel peach */
     padding: 50px;
     width: 320px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
@@ -34,7 +34,7 @@ body {
 
 .box-input {
     display: flex;
-    justify-content: space-between;
+    align-items: center; /* Membuat ikon sejajar dengan input */
     margin: 10px;
     border-bottom: 2px solid #D81B60; /* Garis bawah pink cerah */
     padding: 8px 0;
@@ -43,7 +43,10 @@ body {
 .box-input i {
     font-size: 23px;
     color: #D81B60; /* Pink cerah */
-    padding: 5px 0;
+    margin-right: 10px; /* Jarak antara ikon dan input */
+    height: 24px; /* Tinggi ikon agar sejajar */
+    display: flex;
+    align-items: center; /* Memastikan ikon sejajar vertikal */
 }
 
 .box-input input {

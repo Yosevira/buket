@@ -8,14 +8,31 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Ambil riwayat transaksi pengguna yang sedang login
+// Ambil informasi sesi
 $user_id = $_SESSION['user_id'];
-$query = "SELECT transaksi.kode_pesanan AS transaksi_id, transaksi.created_at, transaksi.total, 
-                users.fullname, users.email
-        FROM transaksi 
-        INNER JOIN users ON transaksi.user_id = users.id 
-        WHERE transaksi.user_id = '$user_id'
-        ORDER BY transaksi.created_at DESC";
+$role = $_SESSION['role'];
+
+// Validasi role
+if ($role !== 'admin' && $role !== 'customer') {
+    header("Location: index.php");
+    exit();
+}
+
+// Query berdasarkan role
+if ($role === 'admin') {
+    $query = "SELECT transaksi.kode_pesanan AS transaksi_id, transaksi.created_at, transaksi.total, 
+                    users.fullname, users.email
+            FROM transaksi 
+            INNER JOIN users ON transaksi.user_id = users.id 
+            ORDER BY transaksi.created_at DESC";
+} elseif ($role === 'customer') {
+    $query = "SELECT transaksi.kode_pesanan AS transaksi_id, transaksi.created_at, transaksi.total, 
+                    users.fullname, users.email
+            FROM transaksi 
+            INNER JOIN users ON transaksi.user_id = users.id 
+            WHERE transaksi.user_id = '$user_id'
+            ORDER BY transaksi.created_at DESC";
+}
 $result = mysqli_query($conn, $query);
 ?>
 
@@ -31,10 +48,13 @@ $result = mysqli_query($conn, $query);
 
 <body>
     <div class="admin-container">
-        <h1>ADMIN PANEL</h1>
         <div class="admin-menu">
-            <a href="admin.php" class="riwayat-trx">Kembali</a>
-            <a href="logout.php" class="logout-button">Logout</a>
+            <!-- Tombol Kembali Dinamis -->
+            <?php if ($role === 'admin'): ?>
+                <a href="admin.php" class="riwayat-trx">Kembali</a>
+            <?php elseif ($role === 'customer'): ?>
+                <a href="profil.php" class="riwayat-trx">Kembali</a>
+            <?php endif; ?>
         </div>
     </div>
     <div class="admin-content">

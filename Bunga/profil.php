@@ -31,6 +31,11 @@ if (!$user) {
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+    footer {
+        background-color: #FFF8F2;
+    }
+    </style>
 </head>
 
 <body>
