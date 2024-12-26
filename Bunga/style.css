@@ -69,6 +69,19 @@ ul {
 .order-button:hover {
     background-color: #e04842;
 }
+.footer {
+    text-align: center; /* Pusatkan teks */
+    background-color: #f0a5ce; /* Samakan warna background dengan halaman */
+    padding: 1px 0; /* Beri jarak atas dan bawah */
+    margin: 0; /* Hilangkan margin */
+    width: 100%; /* Pastikan lebar penuh */
+    position: relative; /* default */
+    bottom: 0; /* Tempel ke bawah */
+    left: 0; /* Pastikan dari sisi kiri */
+    font-size: 14px; /* Ukuran teks */
+    color: #333; /* Warna teks */
+    margin-top: 20px;
+}
 
 /* ======================== */
 /* BAGIAN NAVBAR (GLOBAL) */
@@ -680,6 +693,27 @@ footer {
     width: 100%;
     bottom: 0;
 }
+/* Notifikasi yang lebih rapi dan menarik */
+.succes {
+    background-color: #d4edda; /* Latar belakang hijau muda */
+    color: #155724; /* Teks hijau gelap */
+    border: 1px solid #c3e6cb; /* Border hijau */
+    padding: 15px; /* Padding di sekitar teks */
+    border-radius: 8px; /* Sudut membulat */
+    margin-bottom: 20px; /* Ruang bawah notifikasi */
+    font-size: 16px; /* Ukuran font lebih besar */
+    text-align: center; /* Teks di tengah */
+    font-weight: bold; /* Teks tebal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan untuk efek 3D */
+}
+
+/* Tipe notifikasi lain (contoh untuk kesalahan) */
+.error {
+    background-color: #f8d7da; /* Latar belakang merah muda */
+    color: #721c24; /* Teks merah gelap */
+    border: 1px solid #f5c6cb; /* Border merah */
+}
+
 /* ======================== */
 /* BAGIAN RIWAYAT TRANSAKSI */
 /* ======================== */

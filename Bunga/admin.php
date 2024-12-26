@@ -100,9 +100,13 @@ if (isset($_GET['delete_id'])) {
         <select id="category" name="category_id" required>
             <?php
         // Query untuk mengambil data kategori
-        $categories = mysqli_query($conn, "SELECT * FROM categories");
-        while ($cat = mysqli_fetch_assoc($categories)) {
-            echo "<option value='{$cat['id']}'>{$cat['nama_kategori']}</option>";
+        $categories = mysqli_query($conn, "SELECT * FROM categories"); 
+        if (mysqli_num_rows($categories) > 0) { 
+            while ($cat = mysqli_fetch_assoc($categories)) { 
+                echo "<option value='{$cat['id']}'>{$cat['nama_kategori']}</option>"; 
+            } 
+        } else { 
+            echo "<option value=''>Tidak ada kategori tersedia</option>"; 
         }
         ?>
         </select>
