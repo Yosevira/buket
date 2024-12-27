@@ -51,28 +51,12 @@ if (isset($_POST['login'])) {
             <div class="box-input">
                 <i data-feather="lock"></i>
                 <input type="password" id="password" name="password" placeholder="Password" required>
-                <span id="togglePassword" style="cursor: pointer;" data-feather="eye"></span>
             </div>
             <button type="submit" class="btn-input" name="login">Login</button>
             <p>Belum punya akun? <a href="register.php">Register disini</a></p>
         </form>
     </div>
 
-    <script>
-        feather.replace();
-
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordField = document.getElementById('password');
-
-        togglePassword.addEventListener('click', () => {
-            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordField.setAttribute('type', type);
-
-            // Ganti ikon mata
-            togglePassword.setAttribute('data-feather', type === 'password' ? 'eye' : 'eye-off');
-            feather.replace();
-        });
-    </script>
 </body>
 
 </html>

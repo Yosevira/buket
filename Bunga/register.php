@@ -53,33 +53,11 @@ if (isset($_POST['register'])) {
             <div class="box-input">
                 <i data-feather="lock"></i>
                 <input type="password" id="password" name="password" placeholder="Password" required>
-                <span id="togglePassword" style="cursor: pointer;" data-feather="eye"></span>
             </div>
             <button type="submit" name="register" class="btn-input">Register</button>
             <p>Sudah punya akun? <a href="index.php">Login di sini</a></p>
         </form>
     </div>
-
-    <!-- Script untuk mengganti ikon mata -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const togglePassword = document.querySelector('#togglePassword');
-            const passwordField = document.querySelector('#password');
-
-            togglePassword.addEventListener('click', function () {
-                // Toggle tipe input antara 'password' dan 'text'
-                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordField.setAttribute('type', type);
-
-                // Toggle ikon antara eye dan eye-off
-                this.setAttribute('data-feather', type === 'password' ? 'eye' : 'eye-off');
-                feather.replace(); // Refresh ikon Feather untuk mengganti tampilan
-            });
-        });
-
-        // Refresh semua ikon Feather saat halaman dimuat
-        feather.replace();
-    </script>
 </body>
 
 </html>
