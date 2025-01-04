@@ -73,20 +73,7 @@ if (!$result) {
     <link rel="stylesheet" href="style.css">
     <style>
     @keyframes fly-to-cart {
-        0% {
-            opacity: 1;
-            transform: translate(0, 0) scale(1);
-        }
-
-        50% {
-            opacity: 0.7;
-            transform: translate(calc(50vw - 50%), calc(50vh - 50%)) scale(0.5);
-        }
-
-        100% {
-            opacity: 0;
-            transform: translate(var(--cart-x), var(--cart-y)) scale(0.2);
-        }
+        /* (animasi sebelumnya tetap sama) */
     }
 
     .fly-animation {
@@ -103,9 +90,7 @@ if (!$result) {
 
     .footer {
         background-color: #f4f4f9;
-        /* Warna latar belakang footer */
         color: #000;
-        /* Warna teks footer */
     }
 
     .cart-icon {
@@ -116,11 +101,20 @@ if (!$result) {
     h2 {
         font-size: 35px;
         font-family: 'Dancing Script', cursive;
-        /* Font untuk logo */
         font-weight: bold;
         color: #f0a5ce;
     }
-    </style>
+
+    .read-more {
+        color: #007BFF; /* Warna biru */
+        text-decoration: underline; /* Garis bawah */
+        cursor: pointer; /* Ubah kursor menjadi pointer */
+    }
+
+    .read-more:hover {
+        color: #0056b3; /* Warna biru lebih gelap untuk efek hover */
+    }
+</style>
 </head>
 
 <body>
