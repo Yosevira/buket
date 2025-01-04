@@ -5,7 +5,7 @@ include 'koneksi.php';
 function getNameById($data, $id) {
     foreach ($data as $row) {
         if ($row[0] == $id) {
-            return $row[1]; // Kolom 2 adalah nama wilayah (di CSV)
+            return $row[2]; // Kolom 2 adalah nama wilayah (di CSV)
         }
     }
     return null;
@@ -33,11 +33,30 @@ if (isset($_POST['register'])) {
     $fullname = $_POST['fullname'];
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
     $no_telepon = $_POST['no_telepon'];
     $dusun = $_POST['dusun'];
 
-    // Ambil ID dari input
+    // Validasi Password
+    if ($password !== $confirm_password) {
+        echo "<script>alert('Password dan konfirmasi password tidak sama!');</script>";
+        exit;
+    }
+
+    if (!preg_match('/^(?=.*[A-Z])(?=.*\d).{8,}$/', $password)) {
+        echo "<script>alert('Password harus terdiri dari minimal 8 karakter, mengandung huruf alfabet dan angka.');</script>";
+        exit;
+    }
+
+    // Validasi Nomor Telepon
+    if (!preg_match('/^0\d{11,13}$/', $no_telepon)) {
+        echo "<script>alert('Nomor telepon harus dimulai dengan 0 dan memiliki panjang 12-14 angka.');</script>";
+        exit;
+    }
+
+    // Jika validasi lolos, hash password dan lanjutkan proses penyimpanan
+    $password = password_hash($password, PASSWORD_BCRYPT);
     $desa_id = $_POST['desa'];
     $kecamatan_id = $_POST['kecamatan'];
     $kota_id = $_POST['kota'];
@@ -79,6 +98,7 @@ if (isset($_POST['register'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Page</title>
     <link rel="stylesheet" href="styleb.css">
+    <script src="https://unpkg.com/feather-icons"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -96,10 +116,14 @@ if (isset($_POST['register'])) {
                 <input type="email" name="email" placeholder="Email" required>
             </div>
             <div class="box-input">
-                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <span class="toggle-password"><i data-feather="eye"></i></span>
             </div>
             <div class="box-input">
-                <input type="text" name="no_telepon" placeholder="Nomor Telepon" required>
+                <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm Password" required>
+            </div>
+            <div class="box-input">
+                <input type="text" id="no_telepon" name="no_telepon" placeholder="Nomor Telepon" required>
             </div>
             <div class="box-input">
                 <input type="text" name="dusun" placeholder="Dusun" required>
@@ -169,6 +193,54 @@ if (isset($_POST['register'])) {
                         $('#desa').append(`<option value="${village[0]}">${village[2]}</option>`);
                     }
                 });
+            });
+        });
+        $(document).ready(function () {
+            // Show/Hide Password
+            feather.replace();
+
+            const togglePassword = document.querySelector('.toggle-password');
+            const passwordInput = document.getElementById('password');
+
+            togglePassword.addEventListener('click', () => {
+                // Toggle tipe password
+                const isPassword = passwordInput.type === 'password';
+                passwordInput.type = isPassword ? 'text' : 'password';
+
+                // Ubah ikon secara langsung
+                togglePassword.innerHTML = isPassword ? '<i data-feather="eye-off"></i>' : '<i data-feather="eye"></i>';
+                feather.replace(); // Gambar ulang ikon baru
+            });
+
+            // Validasi Password
+            $('#password, #confirm-password').on('input', function () {
+                const password = $('#password').val();
+                const confirmPassword = $('#confirm-password').val();
+                const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/;
+
+                if (!passwordRegex.test(password)) {
+                    $('#password').get(0).setCustomValidity('Password harus terdiri dari minimal 8 karakter, mengandung huruf alfabet dan angka.');
+                } else {
+                    $('#password').get(0).setCustomValidity('');
+                }
+
+                if (confirmPassword !== password) {
+                    $('#confirm-password').get(0).setCustomValidity('Password tidak sama.');
+                } else {
+                    $('#confirm-password').get(0).setCustomValidity('');
+                }
+            });
+
+            // Validasi Nomor Telepon
+            $('#no_telepon').on('input', function () {
+                const phone = $(this).val();
+                const phoneRegex = /^0\d{11,13}$/; // Dimulai dengan 0, panjang 12-14 karakter.
+
+                if (!phoneRegex.test(phone)) {
+                    $('#no_telepon').get(0).setCustomValidity('Nomor telepon harus dimulai dengan 0 dan memiliki panjang 12-14 angka.');
+                } else {
+                    $('#no_telepon').get(0).setCustomValidity('');
+                }
             });
         });
     </script>

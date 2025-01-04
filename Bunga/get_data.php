@@ -4,6 +4,14 @@ include 'register.php'; // Include fungsi readCsv()
 $type = $_GET['type'] ?? '';
 $id = $_GET['id'] ?? '';
 
+if ($type === 'provinces') {
+    $data = readCsv('data/provinces.csv');
+    $filtered = array_filter($data, function ($item) use ($id) {
+        return $item['province_id'] == $id;
+    });
+    echo json_encode(array_values($filtered));
+}
+
 if ($type === 'regencies') {
     $data = readCsv('data/regencies.csv');
     $filtered = array_filter($data, function ($item) use ($id) {
