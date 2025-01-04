@@ -8,19 +8,21 @@ body {
     background-attachment: fixed;
     font-family: 'Dancing Script', cursive, sans-serif;
     color: #5D4037; /* Warna coklat bunga */
+    display: flex;
+    justify-content: center; /* Pusatkan elemen secara horizontal */
+    align-items: center; /* Pusatkan elemen secara vertikal */
+    min-height: 100vh; /* Pastikan tinggi minimum halaman mencakup layar */
+    overflow-y: auto; /* Aktifkan scroll jika konten melampaui layar */
 }
 
 .input {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background: #fff8f2f3; /* Warna pastel peach */
     padding: 50px;
     width: 320px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
 }
+
 
 .input h1 {
     text-align: center;

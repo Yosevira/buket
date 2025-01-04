@@ -21,13 +21,13 @@ if ($role !== 'admin' && $role !== 'customer') {
 // Query berdasarkan role
 if ($role === 'admin') {
     $query = "SELECT transaksi.kode_pesanan AS transaksi_id, transaksi.created_at, transaksi.total, 
-                    users.fullname, users.email
+                    transaksi.tanggal_pengambilan, users.fullname, users.no_telepon
             FROM transaksi 
             INNER JOIN users ON transaksi.user_id = users.id 
             ORDER BY transaksi.created_at DESC";
 } elseif ($role === 'customer') {
     $query = "SELECT transaksi.kode_pesanan AS transaksi_id, transaksi.created_at, transaksi.total, 
-                    users.fullname, users.email
+                    transaksi.tanggal_pengambilan, users.fullname, users.no_telepon
             FROM transaksi 
             INNER JOIN users ON transaksi.user_id = users.id 
             WHERE transaksi.user_id = '$user_id'
@@ -65,20 +65,26 @@ $result = mysqli_query($conn, $query);
                 <th>No Pesanan</th>
                 <th>Tanggal</th>
                 <th>Nama Customer</th>
-                <th>Email</th>
+                <th>No Telepon</th>
                 <th>Total</th>
-                <th>Aksi</th>
+                <th>Tanggal Pengambilan</th>
+                <?php if ($role === 'admin'): ?>
+                    <th>Aksi</th>
+                <?php endif; ?>
             </tr>
             <?php while ($row = mysqli_fetch_assoc($result)): ?>
             <tr>
-                <td><?= $row['transaksi_id'] ?></td>
-                <td><?= $row['created_at'] ?></td>
+                <td><?= htmlspecialchars($row['transaksi_id']) ?></td>
+                <td><?= htmlspecialchars($row['created_at']) ?></td>
                 <td><?= htmlspecialchars($row['fullname']) ?></td>
-                <td><?= htmlspecialchars($row['email']) ?></td>
+                <td><?= htmlspecialchars($row['no_telepon']) ?></td>
                 <td>Rp <?= number_format($row['total'], 0, ',', '.') ?></td>
-                <td>
-                    <a href="cetak_struk.php?id=<?= $row['transaksi_id'] ?>" class="edit-button">Cetak Struk</a>
-                </td>
+                <td><?= htmlspecialchars($row['tanggal_pengambilan']) ?></td>
+                <?php if ($role === 'admin'): ?>
+                    <td>
+                        <a href="cetak_struk.php?id=<?= htmlspecialchars($row['transaksi_id']) ?>" class="edit-button">Cetak Struk</a>
+                    </td>
+                <?php endif; ?>
             </tr>
             <?php endwhile; ?>
         </table>

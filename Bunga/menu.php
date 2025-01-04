@@ -152,18 +152,28 @@ if (!$result) {
         <!-- Daftar Produk -->
         <div class="buket-list">
             <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-            <div class="buket-item">
-                <img src="foto/<?= htmlspecialchars($row['image']); ?>" alt="<?= htmlspecialchars($row['name']); ?>">
-                <h3><?= htmlspecialchars($row['name']); ?></h3>
-                <p><?= htmlspecialchars($row['description']); ?></p>
-                <p>Rp <?= number_format($row['price'], 0, ',', '.'); ?></p>
-                <!-- Tombol untuk menambahkan produk ke keranjang -->
+        <div class="buket-item">
+            <img src="foto/<?= htmlspecialchars($row['image']); ?>" alt="<?= htmlspecialchars($row['name']); ?>">
+            <h3><?= htmlspecialchars($row['name']); ?></h3>
+                <p class="description">
+                    <?= strlen($row['description']) > 50 ? substr(htmlspecialchars($row['description']), 0, 50) . '...' : htmlspecialchars($row['description']); ?>
+            <?php if (strlen($row['description']) > 50): ?>
+                <span class="read-more" data-description="<?= htmlspecialchars($row['description']); ?>">Baca Selengkapnya...</span>
+            <?php endif; ?>
+        </p>
+            <p>Rp <?= number_format($row['price'], 0, ',', '.'); ?></p>
                 <form action="menu.php" method="POST">
-                    <input type="hidden" name="product_id" value="<?= $row['id']; ?>">
-                    <button type="submit" class="add-to-cart">Tambah ke Keranjang</button>
-                </form>
+                <input type="hidden" name="product_id" value="<?= $row['id']; ?>">
+                <button type="submit" class="add-to-cart">Tambah ke Keranjang</button>
+            </form>
+        </div>
+        <?php } ?>
+        </div>
+        <div id="descriptionModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <p id="fullDescription"></p>
             </div>
-            <?php } ?>
         </div>
 
         <!-- Footer -->
@@ -215,6 +225,31 @@ if (!$result) {
         });
 
         feather.replace();
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const modal = document.getElementById('descriptionModal');
+                const modalContent = document.getElementById('fullDescription');
+                const closeButton = document.querySelector('.close-button');
+
+                document.querySelectorAll('.read-more').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const description = button.getAttribute('data-description');
+                        modalContent.textContent = description;
+                        modal.style.display = 'flex';
+                    });
+                });
+
+                closeButton.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                });
+
+                window.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            });
         </script>
 </body>
 

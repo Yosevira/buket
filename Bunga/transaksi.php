@@ -19,13 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nama_pemesan = mysqli_real_escape_string($conn, $_POST['fullname']);
     $alamat_pengiriman = mysqli_real_escape_string($conn, $_POST['address']);
     $metode_pembayaran = mysqli_real_escape_string($conn, $_POST['payment-method']);
+    $tanggal_pengambilan = mysqli_real_escape_string($conn, $_POST['pickup_date']);
+    $catatan = mysqli_real_escape_string($conn, $_POST['note']);
 
     // Generate kode pesanan unik (8 digit acak)
     $kode_pesanan = substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 8);
 
     // Simpan transaksi ke tabel transaksi
-    $stmt = $conn->prepare("INSERT INTO transaksi (kode_pesanan, user_id, nama_pemesan, total, alamat_pengiriman, metode_pembayaran) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sisdss", $kode_pesanan, $user_id, $nama_pemesan, $total_price, $alamat_pengiriman, $metode_pembayaran);
+    $stmt = $conn->prepare("INSERT INTO transaksi (kode_pesanan, user_id, nama_pemesan, total, alamat_pengiriman, metode_pembayaran, tanggal_pengambilan, catatan) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sisdssss", $kode_pesanan, $user_id, $nama_pemesan, $total_price, $alamat_pengiriman, $metode_pembayaran, $tanggal_pengambilan, $catatan);
     $stmt->execute();
     $transaksi_id = $stmt->insert_id; // Dapatkan ID transaksi terakhir
     $stmt->close();
@@ -57,6 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $whatsappUrl = 
         "https://wa.me/6285231569104?text=Kode%20Pesanan:%20{$kode_pesanan}%0ANama:%20" . urlencode($nama_pemesan) .
         "%0AAlamat:%20" . urlencode($alamat_pengiriman) .
+        "%0ATanggal%20Pengambilan:%20" . urlencode($tanggal_pengambilan) .
+        "%0ACatatan:%20" . urlencode($catatan) .
         "%0AProduk:%0A{$productDetailsText}%0ATotal:%20Rp%20" . number_format($total_price, 0, ',', '.') .
         "%0AMetode%20Pembayaran:%20" . urlencode($metode_pembayaran);
 
@@ -137,6 +141,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" name="fullname" required>
             <label>Alamat Pengiriman:</label>
             <textarea name="address" required></textarea>
+            <label>Tanggal Pengambilan:</label>
+            <input type="date" name="pickup_date" required>
+            <label>Catatan:</label>
+            <textarea name="note"></textarea>
             <label>Total Harga:</label>
             <input type="text" id="total-price" value="Rp <?= number_format($total_price, 0, ',', '.'); ?>" readonly>
             <label>Metode Pembayaran:</label>

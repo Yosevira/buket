@@ -370,8 +370,6 @@ header .logo {
     margin-bottom: 20px;
 }
 
-
-
 /* ======================== */
 /* BAGIAN TENTANG KAMI (HALAMAN ABOUT) */
 /* ======================== */
@@ -538,6 +536,38 @@ footer {
     color: #ff4d4d; /* Warna saat hover */
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #000;
+}
+
 /* ======================== */
 /* BAGIAN TABEL (HALAMAN ADMIN) */
 /* ======================== */
@@ -694,24 +724,52 @@ footer {
     bottom: 0;
 }
 /* Notifikasi yang lebih rapi dan menarik */
-.succes {
-    background-color: #d4edda; /* Latar belakang hijau muda */
-    color: #155724; /* Teks hijau gelap */
-    border: 1px solid #c3e6cb; /* Border hijau */
-    padding: 15px; /* Padding di sekitar teks */
-    border-radius: 8px; /* Sudut membulat */
-    margin-bottom: 20px; /* Ruang bawah notifikasi */
-    font-size: 16px; /* Ukuran font lebih besar */
-    text-align: center; /* Teks di tengah */
-    font-weight: bold; /* Teks tebal */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan untuk efek 3D */
+.success {
+    background-color: #d4edda; /* Warna hijau lembut */
+    color: #155724; /* Warna teks hijau gelap */
+    border: 1px solid #c3e6cb; /* Border dengan warna senada */
+    border-radius: 5px; /* Membulatkan sudut */
+    padding: 10px 20px; /* Memberikan ruang di dalam elemen */
+    font-size: 1rem; /* Ukuran font yang nyaman dibaca */
+    margin: 20px 0; /* Jarak antar elemen */
+    display: flex; /* Untuk menampilkan ikon di sebelah teks */
+    align-items: center; /* Menyelaraskan ikon dengan teks */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+    animation: fadeIn 0.5s ease-out; /* Animasi muncul */
 }
 
-/* Tipe notifikasi lain (contoh untuk kesalahan) */
-.error {
-    background-color: #f8d7da; /* Latar belakang merah muda */
-    color: #721c24; /* Teks merah gelap */
-    border: 1px solid #f5c6cb; /* Border merah */
+.success::before {
+    content: "✔"; /* Ikon checkmark */
+    color: #28a745; /* Warna ikon hijau cerah */
+    font-weight: bold;
+    margin-right: 10px; /* Jarak ikon dengan teks */
+    font-size: 1.2rem; /* Ukuran ikon */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Transparan pada awalnya */
+        transform: translateY(-10px); /* Geser sedikit ke atas */
+    }
+    to {
+        opacity: 1; /* Sepenuhnya terlihat */
+        transform: translateY(0); /* Kembali ke posisi semula */
+    }
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-out;
+    transition: opacity 0.5s ease-out; /* Transisi memudar */
 }
 
 /* ======================== */

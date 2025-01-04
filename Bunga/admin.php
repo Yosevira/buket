@@ -77,9 +77,9 @@ if (isset($_GET['delete_id'])) {
 
     <!-- Notifikasi -->
     <?php if (isset($_GET['success'])): ?>
-    <p class="success"><?= htmlspecialchars($_GET['success']) ?></p>
+        <p class="success" id="successNotification"><?= htmlspecialchars($_GET['success']) ?></p>
     <?php elseif (isset($_GET['error'])): ?>
-    <p class="error"><?= htmlspecialchars($_GET['error']) ?></p>
+        <p class="error"><?= htmlspecialchars($_GET['error']) ?></p>
     <?php endif; ?>
 
     <!-- Form Tambah Produk -->
@@ -143,6 +143,16 @@ if (isset($_GET['delete_id'])) {
             ?>
     </table>
 </div>
+<script>
+    setTimeout(() => {
+        const notification = document.getElementById('successNotification');
+        if (notification) {
+            notification.style.transition = "opacity 0.5s ease-out";
+            notification.style.opacity = "0"; // Mulai animasi memudar
+            setTimeout(() => notification.remove(), 500); // Hapus elemen setelah animasi selesai
+        }
+    }, 3000); // 3 detik
+</script>
 </body>
 
 </html>

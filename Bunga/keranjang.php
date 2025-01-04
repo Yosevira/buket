@@ -41,7 +41,6 @@ $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keranjang Belanja</title>
-    <link rel="stylesheet" href="style.css">
     <style>
     body,
     html {
@@ -112,34 +111,32 @@ $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
     }
 
     .cart-buttons {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
     }
 
     .cart-buttons .checkout {
-        padding: 5px 5px;
-        font-size: 20px;
-        background: #28a745;
+        padding: 10px 20px;
+        font-size: 16px;
+        background: #007bff;
         color: white;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        box-shadow: 0 4px 10px rgb(0, 255, 60);
     }
 
     .cart-buttons .checkout:hover {
-        background: #218838;
+        background: #0056b3;
     }
 
     .cart-buttons .back-button {
-        margin-bottom: -6px;
-        margin-top: 110px;
-        padding: 5px;
-        background: #1600e0;
+        padding: 10px 20px;
+        background: #007bff;
         color: white;
         border: none;
-        border-radius: 4px;
+        border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s;
     }
@@ -147,6 +144,7 @@ $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
     .cart-buttons .back-button:hover {
         background: #1600e0;
     }
+
 
     /* Tambahan CSS untuk Tombol */
     .cart-container a {
@@ -168,7 +166,7 @@ $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : 0;
 </head>
 
 <body>
-    <div class="cart-container">
+    <div class="cart-container" id="cart-page">
         <div class="cart-header">
             <h2>Keranjang Belanja Anda</h2>
         </div>
