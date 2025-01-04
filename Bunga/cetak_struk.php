@@ -13,13 +13,14 @@ $kode_pesanan = $_GET['id'];
 
 // Ambil data transaksi berdasarkan kode pesanan
 $query_transaksi = "
-    SELECT transaksi.kode_pesanan, transaksi.created_at AS tanggal, users.fullname, transaksi.total
+    SELECT transaksi.kode_pesanan, transaksi.created_at AS tanggal, transaksi.tanggal_pengambilan, 
+        users.fullname, transaksi.alamat_pengiriman AS alamat, transaksi.total, transaksi.metode_pembayaran AS payment, transaksi.catatan
     FROM transaksi
     INNER JOIN users ON transaksi.user_id = users.id
     WHERE transaksi.kode_pesanan = ?
 ";
 $stmt_transaksi = $conn->prepare($query_transaksi);
-$stmt_transaksi->bind_param("s", $kode_pesanan); // Menggunakan tipe string karena kode pesanan sering berupa string
+$stmt_transaksi->bind_param("s", $kode_pesanan);
 $stmt_transaksi->execute();
 $result_transaksi = $stmt_transaksi->get_result();
 $data_transaksi = $result_transaksi->fetch_assoc();
@@ -50,16 +51,36 @@ $html = "
 <head>
     <title>{$data_transaksi['fullname']}</title>
     <style>
+        @font-face {
+            font-family: 'Pristina';
+            src: url('fonts/Pristina 400.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'SimSunExtB';
+            src: url('fonts/simsunb.ttf') format('truetype');
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'SimSunExtB';
             margin: 20px;
         }
-        h1 {
+        .header {
             text-align: center;
-            color: #333;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 100%;
+            height: auto;
+        }
+        h1 {
+            font-family: 'Pristina';
+            font-size: 24px;
+            margin: 10px 0;
         }
         .info {
+            font-size: 14px;
             margin-bottom: 20px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
         }
         table {
             width: 100%;
@@ -68,25 +89,44 @@ $html = "
         }
         table th, table td {
             border: 1px solid #ddd;
-            padding: 8px;
-        }
-        table th {
-            background-color: #f2f2f2;
+            padding: 10px;
             text-align: left;
         }
-        .footer {
+        table th {
+            background-color: #f4f4f4;
+            font-family: 'SimSunExtB';
+            font-size: 14px;
+        }
+        table td {
+            font-family: 'SimSunExtB';
+            font-size: 14px;
+        }
+        .totals {
             margin-top: 20px;
+            text-align: right;
+            font-family: 'SimSunExtB';
+        }
+        .footer {
             text-align: center;
+            font-family: 'Pristina';
+            margin-top: 20px;
             font-style: italic;
+            border-top: 2px solid #000;
+            padding-top: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>Bukti Pembayaran</h1>
+    <div class='header'>
+        <img src='foto/Logo Struk.png' alt='Logo Toko'>
+        <h1>Struk Transaksi</h1>
+    </div>
     <div class='info'>
         <p><strong>Nama Pemesan:</strong> {$data_transaksi['fullname']}</p>
+        <p><strong>Alamat:</strong> {$data_transaksi['alamat']}</p>
         <p><strong>Kode Pesanan:</strong> {$data_transaksi['kode_pesanan']}</p>
-        <p><strong>Waktu:</strong> {$data_transaksi['tanggal']}</p>
+        <p><strong>Waktu Pemesanan:</strong> {$data_transaksi['tanggal']}</p>
+        <p><strong>Tanggal Pengambilan:</strong> {$data_transaksi['tanggal_pengambilan']}</p>
     </div>
     <table>
         <thead>
@@ -94,11 +134,11 @@ $html = "
                 <th>Nama Produk</th>
                 <th>Harga Satuan</th>
                 <th>Jumlah</th>
-                <th>Subtotal</th>
+                <th>Total</th>
             </tr>
         </thead>
         <tbody>";
-        
+
 $total_semua = 0;
 while ($row_produk = $result_produk->fetch_assoc()) {
     $total_semua += $row_produk['subtotal'];
@@ -114,8 +154,15 @@ while ($row_produk = $result_produk->fetch_assoc()) {
 $html .= "
         </tbody>
     </table>
-    <p><strong>Total Keseluruhan:</strong> Rp " . number_format($total_semua, 0, ',', '.') . "</p>
-    <div class='footer'>Terima kasih telah berbelanja!</div>
+    <div class='totals'>
+        <p><strong>Total Keseluruhan:</strong> Rp " . number_format($total_semua, 0, ',', '.') . "</p>
+        <p><strong>Metode Pembayaran:</strong> {$data_transaksi['payment']}</p>
+    </div>
+    <p><strong>Catatan:</strong> {$data_transaksi['catatan']}</p>
+    <div class='footer'>
+        Buket Cantik Di Tangan Anda<br>
+        Terima Kasih Sudah Berbelanja
+    </div>
 </body>
 </html>
 ";
