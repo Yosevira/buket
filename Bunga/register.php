@@ -45,9 +45,9 @@ if (isset($_POST['register'])) {
     }
 
     if (!preg_match('/^(?=.*[A-Z])(?=.*\d).{8,}$/', $password)) {
-        echo "<script>alert('Password harus terdiri dari minimal 8 karakter, mengandung huruf alfabet dan angka.');</script>";
-        exit;
-    }
+        // Tambahkan fallback untuk server-side validasi jika JavaScript nonaktif
+        die('Password harus terdiri dari minimal 8 karakter, mengandung huruf alfabet dan angka.');
+    }    
 
     // Validasi Nomor Telepon
     if (!preg_match('/^0\d{11,13}$/', $no_telepon)) {
@@ -203,25 +203,24 @@ if (isset($_POST['register'])) {
             const passwordInput = document.getElementById('password');
 
             togglePassword.addEventListener('click', () => {
-                // Toggle tipe password
                 const isPassword = passwordInput.type === 'password';
                 passwordInput.type = isPassword ? 'text' : 'password';
-
-                // Ubah ikon secara langsung
                 togglePassword.innerHTML = isPassword ? '<i data-feather="eye-off"></i>' : '<i data-feather="eye"></i>';
-                feather.replace(); // Gambar ulang ikon baru
+                feather.replace();
             });
 
             // Validasi Password
             $('#password, #confirm-password').on('input', function () {
                 const password = $('#password').val();
                 const confirmPassword = $('#confirm-password').val();
-                const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/;
+                const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/; // Harus ada huruf dan angka, minimal 8 karakter.
 
                 if (!passwordRegex.test(password)) {
                     $('#password').get(0).setCustomValidity('Password harus terdiri dari minimal 8 karakter, mengandung huruf alfabet dan angka.');
+                    $('#password').addClass('invalid'); // Tambahkan class untuk menandai kesalahan.
                 } else {
                     $('#password').get(0).setCustomValidity('');
+                    $('#password').removeClass('invalid'); // Hapus class jika valid.
                 }
 
                 if (confirmPassword !== password) {

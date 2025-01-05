@@ -6,7 +6,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    font-family: 'Dancing Script', cursive, sans-serif;
+    font-family: sans-serif;
     color: #5D4037; /* Warna coklat bunga */
     display: flex;
     justify-content: center; /* Pusatkan elemen secara horizontal */
@@ -28,7 +28,7 @@ body {
     text-align: center;
     color: #D81B60; /* Pink cerah */
     font-size: 30px;
-    font-family: 'Dancing Script', cursive;
+    font-family: sans-serif;
     letter-spacing: 3px;
     padding-top: 0;
     margin-top: -20px;
